@@ -58,7 +58,6 @@ app.get("/transactions", async (req, res) => {
 
     const params = [month.padStart(2, "0")];
 
-    console.log(month)
 
     if (search) {
       sqlQuery += ` AND (title LIKE ? OR description LIKE ? OR price = ?)`;

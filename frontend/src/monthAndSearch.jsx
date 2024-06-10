@@ -21,32 +21,31 @@ const MonthAndSearch = ({
     "November",
     "December",
   ];
+
   return (
-    <div className="flex justify-between m-5">
+    <div className="flex justify-between m-20">
       {/* Search Box */}
       <div className="bg-[#f8df8c] font-semibold rounded-xl">
         <input
-          className=" bg-[#f8df8c] rounded-xl p-3 focus:outline-none"
+          className="bg-[#f8df8c] rounded-xl p-3 focus:outline-none"
           type="text"
           value={value}
           onChange={onSearchChange}
           placeholder="Search transactions..."
         />
-        <button className=" bg-red-500 rounded-xl p-3" onClick={onClear}>
+        <button className="bg-yellow-500 rounded-xl p-3" onClick={onClear}>
           Clear
         </button>
       </div>
 
-      {/* Month Changer */}
       <div className="container max-w-max bg-[#ebb840] rounded-xl px-2">
         <select
           className="bg-[#ebb840] font-semibold rounded-xl p-3 focus:outline-none"
           value={selectedMonth}
           onChange={onMonthChange}
-          defaultValue={"March"}
         >
           {months.map((month, index) => (
-            <option key={index} value={index+1}>
+            <option key={index} value={(index + 1).toString().padStart(2, '0')}>
               {month}
             </option>
           ))}

@@ -17,7 +17,6 @@ const Statistics = ({ selectedMonth }) => {
           `http://localhost:3000/statistics?month=${selectedMonth}`
         );
         const data =  response.data;
-        console.log(data)
         setStatistics(data);
       } catch (error) {
         console.error("Error fetching statistics:", error);

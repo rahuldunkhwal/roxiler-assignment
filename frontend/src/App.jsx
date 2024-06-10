@@ -7,20 +7,18 @@ import Statistics from "./statistics";
 import BarChart from "./barChart";
 
 const App = () => {
-  const [selectedMonth, setSelectedMonth] = useState("March");
+  const [selectedMonth, setSelectedMonth] = useState("03");
   const [selectedPerPage, setSelectedPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
 
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3000/transactions?month=${selectedMonth}&search=${searchText}&page=${currentPage}&perPage=${selectedPerPage}`
       );
-      // console.log(response.data.transactions);
-
+      console.log("API Response:", response.data.transactions); // Debugging line
       setTransactions(response.data.transactions);
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -29,7 +27,7 @@ const App = () => {
 
   // Handle month change
   const handleMonthChange = (e) => {
-    setSelectedMonth(e.target.value);
+    setSelectedMonth(e.target.value.padStart(2, '0'));
   };
 
   // Handle PerPage Change
@@ -58,10 +56,15 @@ const App = () => {
     }
   };
 
+
   // Fetch transactions when component mounts or dependencies change
   useEffect(() => {
     fetchTransactions();
   }, [selectedMonth, searchText, currentPage, selectedPerPage]);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
 
   return (
     <div className="bg-[#edf6f6]">
